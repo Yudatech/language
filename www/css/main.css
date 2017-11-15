@@ -1,0 +1,11 @@
+.headline-styling {
+  padding: 30px;
+  background-color: #CCC;
+  border: 1px solid #000;
+}
+.row {
+  margin-top: 20px;
+}
+.row .btn {
+  margin-left: 15px;
+}
