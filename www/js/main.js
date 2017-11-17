@@ -1,10 +1,12 @@
+let lang = "EN";
+let keys;
+
 function renderPersons(persons) {
 
     // empty person-list
     $('#person-list').empty();
     //A counter that we will add 1 to for each loop iteration
     let co = 0;
-
     for (let person of persons) {
         $('#person-list').append(` 
                 <div class="card">
@@ -28,27 +30,42 @@ function renderPersons(persons) {
 
             // without .last() shows all the obj array 
             $('.detailed-info').last().append(`
-            <div>${key}: ${val}</div>`);
+            <div>
+                <span class='${key}'>${keys[lang][key]}</span>
+                <span>: ${val}</span>
+            </div>
+            `);
         }
         co++;
-
     }
 }
 //jQuery: please read the contents of persons.json and convert to a JS array (provided it is valid JSON).
 //Then call a function- in this renderPersons a use the data (the array) as an argument. 
 //(argument = inparameter)
 
-
+function renderKeys(translate){
+    keys = translate;
+    $.getJSON('/json/persons.json', renderPersons);
+}
 //a function is needed to change key for persons
-$.getJSON('/json/persons.json', renderPersons);
+$.getJSON('/json/translate.json', renderKeys);
 
 $("#la").click(function () {
-    $(".lg_bt").toggleClass("d-none");
-    let lgNotThisOne= document.querySelector('.d-none').textContent; 
-    if(lgNotThisOne=="EN"){
-        console.log("en");
+    // $(".lg_bt").toggleClass("d-none");
+    // let lgNotThisOne= document.querySelector('.d-none').textContent; 
+    // if(lgNotThisOne=="EN"){
+    //     lang = "sv";
+    // }else{
+    //     lang = "en";
+    // }
+
+    if(lang=="EN"){
+        lang="SV";
     }else{
-        console.log("sv");
+        lang="EN";
+    }
+    $(".lg_bt").text(lang);
+    for(let key in keys[lang]){
+        $('.' + key).text(keys[lang][key]);
     }
 });
-
