@@ -1,11 +1,11 @@
 {
-    "sv": {
+    "SV": {
       "firstName": "Förnamn",
       "lastName": "Efternamn",
       "birthDate": "Födelsedatum",
       "phone": "Telefonnnummer"
     },
-    "en": {
+    "EN": {
       "firstName": "First name",
       "lastName": "Last name",
       "birthDate": "Birth date",

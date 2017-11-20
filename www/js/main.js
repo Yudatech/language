@@ -1,5 +1,5 @@
 let lang = "EN";
-let keys;
+let dict;
 
 function renderPersons(persons) {
 
@@ -31,7 +31,7 @@ function renderPersons(persons) {
             // without .last() shows all the obj array 
             $('.detailed-info').last().append(`
             <div>
-                <span class='${key}'>${keys[lang][key]}</span>
+                <span class='${key}'>${dict[lang][key]}</span>
                 <span>: ${val}</span>
             </div>
             `);
@@ -44,20 +44,14 @@ function renderPersons(persons) {
 //(argument = inparameter)
 
 function renderKeys(translate){
-    keys = translate;
+    dict = translate;
     $.getJSON('/json/persons.json', renderPersons);
 }
 //a function is needed to change key for persons
 $.getJSON('/json/translate.json', renderKeys);
 
 $("#la").click(function () {
-    // $(".lg_bt").toggleClass("d-none");
-    // let lgNotThisOne= document.querySelector('.d-none').textContent; 
-    // if(lgNotThisOne=="EN"){
-    //     lang = "sv";
-    // }else{
-    //     lang = "en";
-    // }
+   
 
     if(lang=="EN"){
         lang="SV";
@@ -65,7 +59,7 @@ $("#la").click(function () {
         lang="EN";
     }
     $(".lg_bt").text(lang);
-    for(let key in keys[lang]){
-        $('.' + key).text(keys[lang][key]);
+    for(let key in dict[lang]){
+        $('.' + key).text(dict[lang][key]);
     }
 });
